@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class BlogController extends AbstractController
 {
     /**
-     * @Route("/blog", name="blog")
+     * @Route("/blog", name="blog_index")
      */
     public function index(): Response
     {
@@ -17,7 +17,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/show/{id}/{ind}")
+     * @Route("/blog/show/{id}/{ind}", name="blog_show")
      */
     public function show($id, $ind): Response
     {

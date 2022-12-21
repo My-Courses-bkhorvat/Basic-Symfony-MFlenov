@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class LoginController extends AbstractController
 {
     /**
-     * @Route("/login/index", methods={"get"})
+     * @Route("/login/index", methods={"get"}, name="login_index")
      */
     public function index(): Response
     {
@@ -17,7 +17,7 @@ class LoginController extends AbstractController
     }
 
     /**
-     * @Route("/login/index", methods={"post"})
+     * @Route("/login/index", methods={"post"}, name="login_index_post")
      */
     public function post(): Response
     {
