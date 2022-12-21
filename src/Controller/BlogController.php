@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class BlogController extends AbstractController
 {
     /**
-     * @Route("/blog")
+     * @Route("/blog", name="blog")
      */
     public function index(): Response
     {
