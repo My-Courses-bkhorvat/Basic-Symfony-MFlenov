@@ -4,4 +4,14 @@
 
 {% block body %}
     <h1>{{ message }}</h1>
+
+    <ul>
+    {% for person in people %}
+        <li>{{ person.firstname }} {{ person.lastname }}</li>
+    {% endfor %}
+    </ul>
+
+    {% if flag == 1 or message != "" %}
+        <p><b>Flag = 1</b></p>
+    {% endif %}
 {% endblock %}
