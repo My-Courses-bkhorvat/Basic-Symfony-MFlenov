@@ -16,9 +16,29 @@ class DbController extends AbstractController
     }
 
     /**
+     * @Route("/db/categories")
+     */
+    public function categories()
+    {
+        $categories = $this->doctrine->getRepository(Category::class)->findAll();
+
+        return $this->render('db/categories.html.twig', ['categories' => $categories]);
+    }
+
+    /**
+     * @Route("/db/editcategory/{id}")
+     */
+    public function editcategory($id)
+    {
+        $category = $this->doctrine->getRepository(Category::class)->findOneBy(['categoryid' => $id]);
+
+        return $this->render('db/editcategory.html.twig', ['category' => $category]);
+    }
+
+    /**
      * @Route("/db/createcategory/{name}")
      */
-    public function index($name)
+    public function createcategory($name)
     {
         $category = new Category();
         $category->setCategoryname($name);
