@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,6 +49,59 @@ class Blog
      * @ORM\Column(name="CategoryId", type="integer", nullable=false)
      */
     private $categoryid;
+
+    public function getBlogid(): ?int
+    {
+        return $this->blogid;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getCategoryid(): ?int
+    {
+        return $this->categoryid;
+    }
+
+    public function setCategoryid(int $categoryid): self
+    {
+        $this->categoryid = $categoryid;
+
+        return $this;
+    }
 
 
 }

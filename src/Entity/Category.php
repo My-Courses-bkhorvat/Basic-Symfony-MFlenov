@@ -28,5 +28,22 @@ class Category
      */
     private $categoryname;
 
+    public function getCategoryid(): ?int
+    {
+        return $this->categoryid;
+    }
+
+    public function getCategoryname(): ?string
+    {
+        return $this->categoryname;
+    }
+
+    public function setCategoryname(string $categoryname): self
+    {
+        $this->categoryname = $categoryname;
+
+        return $this;
+    }
+
 
 }
