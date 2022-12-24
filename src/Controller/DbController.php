@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Category;
@@ -18,11 +19,16 @@ class DbController extends AbstractController
     /**
      * @Route("/db/categories")
      */
-    public function categories()
+    public function categories(Request $request)
     {
-        $categories = $this->doctrine->getRepository(Category::class)->findAll();
+        $searchfor = $request->query->get('searchfor');
 
-        return $this->render('db/categories.html.twig', ['categories' => $categories]);
+        if ($searchfor) {
+            $categories = $this->doctrine->getRepository(Category::class)->findBy(['categoryname' => $searchfor]);
+        } else {
+            $categories = $this->doctrine->getRepository(Category::class)->findAll();
+        }
+        return $this->render('db/categories.html.twig', ['categories' => $categories, 'searchfor' => $searchfor]);
     }
 
     /**

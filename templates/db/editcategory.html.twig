@@ -3,5 +3,10 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1>{{ category.getCategoryname() }}</h1>
+    <h1>Edit {{ category.getCategoryname() }}</h1>
+
+    <form method="post">
+        <input type="text" name="categoryname" value="{{ category.getCategoryname() }}">
+        <button>Save</button>
+    </form>
 {% endblock %}
