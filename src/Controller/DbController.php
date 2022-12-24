@@ -36,7 +36,8 @@ class DbController extends AbstractController
      */
     public function editcategory($id)
     {
-        $category = $this->doctrine->getRepository(Category::class)->findOneBy(['categoryid' => $id]);
+        //$category = $this->doctrine->getRepository(Category::class)->findOneBy(['categoryid' => $id], ['categoryname' => 'asc']);
+        $category = $this->doctrine->getRepository(Category::class)->find($id);
 
         return $this->render('db/editcategory.html.twig', ['category' => $category]);
     }
