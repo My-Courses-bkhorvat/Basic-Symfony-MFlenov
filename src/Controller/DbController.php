@@ -32,9 +32,20 @@ class DbController extends AbstractController
     }
 
     /**
-     * @Route("/db/editcategory/{id}")
+     * @Route("/db/editcategory/{id}", methods={"get"})
      */
     public function editcategory($id)
+    {
+        //$category = $this->doctrine->getRepository(Category::class)->findOneBy(['categoryid' => $id], ['categoryname' => 'asc']);
+        $category = $this->doctrine->getRepository(Category::class)->find($id);
+
+        return $this->render('db/editcategory.html.twig', ['category' => $category]);
+    }
+
+    /**
+     * @Route("/db/editcategory/{id}", methods={"post"})
+     */
+    public function savecategory($id)
     {
         //$category = $this->doctrine->getRepository(Category::class)->findOneBy(['categoryid' => $id], ['categoryname' => 'asc']);
         $category = $this->doctrine->getRepository(Category::class)->find($id);
