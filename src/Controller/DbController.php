@@ -26,7 +26,7 @@ class DbController extends AbstractController
         if ($searchfor) {
             $categories = $this->doctrine->getRepository(Category::class)->findBy(['categoryname' => $searchfor]);
         } else {
-            $categories = $this->doctrine->getRepository(Category::class)->findAll();
+            $categories = $this->doctrine->getRepository(Category::class)->findBy([], ['categoryname' => 'asc']);
         }
         return $this->render('db/categories.html.twig', ['categories' => $categories, 'searchfor' => $searchfor]);
     }
