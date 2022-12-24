@@ -12,7 +12,10 @@
 
     <ul>
         {% for category in categories %}
-            <li><a href="/db/editcategory/{{ category.getCategoryid() }}">{{ category.getCategoryname() }}</a></li>
+            <li>
+                <a href="/db/editcategory/{{ category.getCategoryid() }}">{{ category.getCategoryname() }}</a>
+                <a href="/db/delete/{{ category.getCategoryid() }}">[Delete]</a>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

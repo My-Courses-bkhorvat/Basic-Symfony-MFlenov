@@ -39,31 +39,49 @@ class DbController extends AbstractController
         //$category = $this->doctrine->getRepository(Category::class)->findOneBy(['categoryid' => $id], ['categoryname' => 'asc']);
         $category = $this->doctrine->getRepository(Category::class)->find($id);
 
+        if (!$category) {
+            $category = new Category();
+        }
+
         return $this->render('db/editcategory.html.twig', ['category' => $category]);
     }
 
     /**
      * @Route("/db/editcategory/{id}", methods={"post"})
      */
-    public function savecategory($id)
+    public function savecategory($id, Request $request)
     {
         //$category = $this->doctrine->getRepository(Category::class)->findOneBy(['categoryid' => $id], ['categoryname' => 'asc']);
         $category = $this->doctrine->getRepository(Category::class)->find($id);
 
-        return $this->render('db/editcategory.html.twig', ['category' => $category]);
+        if (!$category) {
+            $category = new Category();
+
+            $category->setCategoryname($request->get('categoryname'));
+
+            $this->doctrine->getManager()->persist($category);
+            $this->doctrine->getManager()->flush();
+        } else {
+            $category->setCategoryname($request->get('categoryname'));
+            $this->doctrine->getManager()->flush();
+        }
+
+        return $this->redirect('/db/categories');
     }
 
     /**
-     * @Route("/db/createcategory/{name}")
+     * @Route("/db/delete/{id}", methods={"get"})
      */
-    public function createcategory($name)
+    public function deletecategory($id)
     {
-        $category = new Category();
-        $category->setCategoryname($name);
 
-        $this->doctrine->getManager()->persist($category);
-        $this->doctrine->getManager()->flush();
+        $category = $this->doctrine->getRepository(Category::class)->find($id);
 
-        return $this->render('db/editcategory.html.twig', ['category' => $category]);
+        if ($category) {
+            $this->doctrine->getManager()->remove($category);
+            $this->doctrine->getManager()->flush();
+        }
+
+        return $this->redirect('/db/categories');
     }
 }
